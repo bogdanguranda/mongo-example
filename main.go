@@ -24,7 +24,7 @@ type Movie struct {
 func main() {
 	session, err := mgo.Dial("127.0.0.1")
 	if err != nil {
-		log.Errorf("Could not connnect to MongoDB! Error was: %v", err.Error())
+		log.Panicf("Could not connnect to MongoDB! Error was: %v", err.Error())
 		return
 	}
 
@@ -38,7 +38,7 @@ func main() {
 
 	err = collection.Find(bson.M{"$and": []interface{}{bson.M{"genre": SCI_FI}, bson.M{"rating": bson.M{"$gt": 8.5}}}}).All(&result)
 	if err != nil {
-		log.Infof("Error when querying MongoDB. Error was: %v", err.Error())
+		log.Warnf("Error when querying MongoDB. Error was: %v", err.Error())
 		return
 	}
 
